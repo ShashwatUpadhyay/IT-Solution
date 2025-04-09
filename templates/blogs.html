@@ -1,0 +1,338 @@
+{% extends "index.html" %}
+{% block title %}INFOCERA | Blog{% endblock title %}
+{% block stylesheet %}
+/* Inherit all styles from home page */
+.hero-gradient {
+    background: radial-gradient(50% 50% at 50% 50%, #F3F4F6 0%, rgba(243, 244, 246, 0) 100%);
+}
+
+/* Blog specific styles */
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-category-badge {
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover .blog-category-badge {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.blog-author-img {
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-author-img {
+    transform: scale(1.1);
+}
+
+/* Pagination styles */
+.pagination .page-item.active .page-link {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.pagination .page-link {
+    color: #3b82f6;
+}
+
+/* Featured post styles */
+.featured-post {
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+}
+
+.featured-post-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation for blog cards */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.blog-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.blog-card:nth-child(1) { animation-delay: 0.1s; }
+.blog-card:nth-child(2) { animation-delay: 0.2s; }
+.blog-card:nth-child(3) { animation-delay: 0.3s; }
+.blog-card:nth-child(4) { animation-delay: 0.4s; }
+.blog-card:nth-child(5) { animation-delay: 0.5s; }
+.blog-card:nth-child(6) { animation-delay: 0.6s; }
+{% endblock stylesheet %}
+
+{% block content %}
+{% load static %}
+<div class="font-sans antialiased text-gray-800">
+    <!-- Blog Hero Section -->
+    <section class="bg-gray-900 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+            <div class="absolute bottom-1/3 -right-20 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center">
+                <span class="inline-block px-4 py-2 rounded-full bg-blue-900/20 border border-blue-400/30 mb-6 animate-fade-in-up">
+                    <span class="text-sm font-medium text-blue-100 tracking-wider">INSIGHTS & UPDATES</span>
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    INFOCERA <span class="text-blue-400">Blogs</span>
+                </h1>
+                
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in animation-delay-1000">
+                    Expert insights on technology trends, best practices, and industry innovations
+                </p>
+                
+                <!-- Search and category filter -->
+                <div class=" max-w-2xl mx-auto opacity-80 animate-fade-in animation-delay-1500">
+                    <div class="relative">
+                        <input type="text" placeholder="Search articles..." class="w-full px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-300 hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap justify-center mt-4 gap-2">
+                        <a href="#" class="px-4 py-2 text-sm font-medium text-blue-100 bg-blue-900/30 rounded-full hover:bg-blue-500 transition">All Topics</a>
+                        <a href="#" class="px-4 py-2 text-sm font-medium text-blue-100 bg-blue-900/30 rounded-full hover:bg-blue-500 transition">Web Development</a>
+                        <a href="#" class="px-4 py-2 text-sm font-medium text-blue-100 bg-blue-900/30 rounded-full hover:bg-blue-500 transition">Cloud Computing</a>
+                        <a href="#" class="px-4 py-2 text-sm font-medium text-blue-100 bg-blue-900/30 rounded-full hover:bg-blue-500 transition">Cybersecurity</a>
+                        <a href="#" class="px-4 py-2 text-sm font-medium text-blue-100 bg-blue-900/30 rounded-full hover:bg-blue-500 transition">AI & ML</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post Section -->
+     {% if latest %}
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Article</h2>
+            
+            <div class="featured-post rounded-xl overflow-hidden shadow-xl">
+                <img src="{{latest.image.url}}" alt="Featured Post" class="w-full h-96 object-cover">
+                <div class="featured-post-content p-8 absolute bottom-0 left-0 right-0">
+                    {% if latest.category %}
+                    <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white mb-4">
+                        {{latest.category.name}}
+                    </div>
+                    {% endif %}
+                    <a href='{% url "blog" latest.slug %}'>
+                    <h3 class="text-3xl font-bold text-white mb-4">{{latest.title}}</h3>
+                    <p class="text-lg text-blue-100 mb-6">{{ latest.content|safe|striptags|truncatewords:30 }}</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Author" class="w-10 h-10 rounded-full object-cover border-2 border-white mr-3">
+                        <div>
+                            <p class="text-sm font-medium text-white"> {% if latest.author.get_full_name %}{{latest.author.get_full_name}} {% else %}{{latest.author.username}}{% endif %}</p>
+                            <p class="text-xs text-blue-200">Published on {{latest.created_at|date:'d M, Y'}} · {{latest.read_time}} min read</p>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Main Blog Content -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Latest Articles</h2>
+                <div class="mt-4 md:mt-0">
+                    <label for="sort" class="sr-only">Sort</label>
+                    <select id="sort" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option>Latest</option>
+                        <option>Most Popular</option>
+                        <option>Trending</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                 {% for blog in blogs %}
+                <article class="blog-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <a href="#">
+                        <img src="{{blog.image.url}}" alt="Blog post" class="w-full h-48 object-cover">
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            {% if blog.category %}
+                            <span class="blog-category-badge inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-3">
+                                {{blog.category.name}}
+                            </span>
+                            {% endif %}
+                            <span class="text-sm text-gray-500">{{blog.created_at|date:'d M, Y'}}</span>
+                            <span class="text-xs text-gray-500 ml-2">· {{blog.read_time}} min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            <a href="{% url "blog" blog.slug %}" class="hover:text-blue-600 transition">{{blog.title}}</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">{{ blog.content|safe|striptags|truncatewords:10 }}</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Author" class="blog-author-img w-8 h-8 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900"> {% if latest.author.get_full_name %}{{latest.author.get_full_name}} {% else %}{{latest.author.username}}{% endif %}</p>
+                                <p class="text-xs text-gray-500">Author</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+                
+            </div>
+            
+            <!-- Pagination -->
+            <div class="mt-16 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-700">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">24</span> articles
+                    </p>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Previous
+                    </a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                        1
+                    </a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        2
+                    </a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        3
+                    </a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated with Our Insights</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Subscribe to our newsletter for the latest tech trends, tutorials, and company news delivered to your inbox.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-grow px-5 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <button class="px-6 py-3 bg-white text-blue-700 font-medium rounded-lg hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg">
+                    Subscribe
+                </button>
+            </div>
+            
+            <p class="mt-4 text-sm text-blue-200">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <!-- Popular Topics Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Explore Popular Topics</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">Web Dev</h3>
+                    <p class="text-xs text-gray-500 mt-1">24 Articles</p>
+                </a>
+                
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">Cloud</h3>
+                    <p class="text-xs text-gray-500 mt-1">18 Articles</p>
+                </a>
+                
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">Security</h3>
+                    <p class="text-xs text-gray-500 mt-1">15 Articles</p>
+                </a>
+                
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">DevOps</h3>
+                    <p class="text-xs text-gray-500 mt-1">12 Articles</p>
+                </a>
+                
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">AI/ML</h3>
+                    <p class="text-xs text-gray-500 mt-1">9 Articles</p>
+                </a>
+                
+                <a href="#" class="group flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-blue-50 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600 transition">Blockchain</h3>
+                    <p class="text-xs text-gray-500 mt-1">7 Articles</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.querySelector('input[type="text"]');
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    // Implement search functionality here
+                    console.log('Searching for:', this.value);
+                }
+            });
+        });
+    </script>
+</div>
+
+{% endblock content %}

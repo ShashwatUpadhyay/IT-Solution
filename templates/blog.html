@@ -1,0 +1,126 @@
+{% extends "index.html" %}
+{% block title %}INFOCERA | {{ blog.title }}{% endblock title %}
+{% block stylesheet %}
+.ck-content > blockquote,
+.ck-content > dl,
+.ck-content > dd,
+.ck-content > h1,
+.ck-content > h2,
+.ck-content > h3,
+.ck-content > h4,
+.ck-content > h5,
+.ck-content > h6,
+.ck-content > hr,
+.ck-content > figure,
+.ck-content > p,
+.ck-content > pre {
+  margin: revert;
+}
+.ck-content > ol,
+.ck-content > ul {
+  list-style: revert;
+  margin: revert;
+  padding: revert;
+}
+
+.ck-content > table {
+  border-collapse: revert;
+}
+.ck-content > h1,
+.ck-content > h2,
+.ck-content > h3,
+.ck-content > h4,
+.ck-content > h5,
+.ck-content > h6 {
+  font-size: revert;
+  font-weight: revert;
+}
+{% endblock stylesheet %}
+{% block content %}
+{% load static %}
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <a href="/" class="text-2xl font-bold text-blue-600">INFOCERA</a>
+      <div>
+        <a href="/" class="text-gray-600 hover:text-blue-600 px-4">Home</a>
+        <a href="/blog" class="text-gray-600 hover:text-blue-600 px-4">Blog</a>
+        <a href="/about" class="text-gray-600 hover:text-blue-600 px-4">About</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="bg-gradient-to-br from-white to-blue-50 text-gray-800 pt-20">
+
+    <!-- Hero Header -->
+    <header class="bg-gradient-to-r from-blue-100 to-blue-50 shadow-md">
+      <div class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900">{{ blog.title }}</h1>
+        <p class="text-gray-600 mt-2 text-lg">{{ blog.category.name }}</p>
+      </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-4">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-blue-600">Home</a>
+        </li>
+        <li>
+          <span class="text-gray-400">/</span>
+        </li>
+        <li>
+          <a href="/blog" class="text-gray-600 hover:text-blue-600">Blog</a>
+        </li>
+        <li>
+          <span class="text-gray-400">/</span>
+        </li>
+        <li class="text-gray-800 font-semibold">{{ blog.title }}</li>
+      </ol>
+    </nav>
+
+    <!-- Blog Content Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
+          
+          <!-- Blog Content (Main Area) -->
+          <div class="lg:col-span-2 bg-white p-8 shadow-lg border border-gray-200 ">
+            <span class="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full">
+              Featured Article
+            </span>
+      
+            <div class="text-gray-700 text-lg leading-relaxed ck-content space-y-6">
+              {{ blog.content|safe }}
+            </div>
+          </div>
+      
+          <!-- Related Posts Sidebar -->
+          {% if more %}
+          <aside class="bg-gray-50 p-6 shadow-sm border border-gray-200 h-fit">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Related Blogs</h3>
+      
+            <!-- Example Related Blog Card -->
+            <div class="space-y-4">
+              {% for post in more %}
+              <a href="{% url "blog" post.slug %}" class="block group">
+                <div class="p-4 bg-white rounded-xl border border-gray-100 shadow hover:shadow-md transition-all duration-300">
+                  <h4 class="text-md font-semibold text-blue-700 group-hover:underline">{{ post.title }}</h4>
+                  <p class="text-sm text-gray-500 mt-1">{{ post.created_at|date:'d M, Y' }}</p>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+        </aside>
+        {% endif %}
+      
+        </div>
+      </section>
+      
+</div>
+
+
+
+{% endblock content %}
