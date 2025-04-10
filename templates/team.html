@@ -1,0 +1,387 @@
+{% extends "index.html" %}
+{% block title %}INFOCERA | Our Team{% endblock title %}
+{% block stylesheet %}
+.hero-gradient {
+    background: radial-gradient(50% 50% at 50% 50%, #F3F4F6 0%, rgba(243, 244, 246, 0) 100%);
+}
+
+/* Animation keyframes */
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+.animation-delay-900 { animation-delay: 0.9s; }
+.animation-delay-1000 { animation-delay: 1s; }
+
+/* Team specific styles */
+.team-member-card {
+    transition: all 0.3s ease;
+    perspective: 1000px;
+}
+
+.team-member-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.team-member-card:hover .team-member-inner {
+    transform: translateY(-10px);
+}
+
+.team-member-social {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.team-member-card:hover .team-member-social {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skill-bar {
+    height: 6px;
+    border-radius: 3px;
+    background-color: #e5e7eb;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    transition: width 1s ease-in-out;
+}
+
+.team-stat-card {
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+}
+
+.team-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+}
+
+.team-stat-icon {
+    transition: all 0.3s ease;
+}
+
+.team-stat-card:hover .team-stat-icon {
+    transform: scale(1.1);
+}
+
+/* Gradient text effect */
+.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.text-transparent {
+    color: transparent;
+}
+
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+/* Department tabs */
+.department-tab {
+    transition: all 0.3s ease;
+}
+
+.department-tab.active {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.department-tab:not(.active):hover {
+    background-color: #e5e7eb;
+}
+
+.department-content {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.department-content.active {
+    display: block;
+}
+{% endblock stylesheet %}
+{% block content %}
+{% load static %}
+<div class="font-sans antialiased text-gray-800">
+    <!-- Hero Section -->
+    <section style='background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url({% static "img/team-bg.jpg" %})' 
+    class="bg-cover bg-center bg-no-repeat pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-[60vh] flex items-center">
+
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+            <div class="absolute bottom-1/3 -right-20 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center">
+                <!-- Animated status badge -->
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/20 border border-blue-400/30 mb-6 animate-fade-in-up">
+                    <span class="h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+                    <span class="text-sm font-medium text-blue-100 tracking-wider">MEET THE TEAM</span>
+                </div>
+                
+                <!-- Headline -->
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">The Minds Behind</span><br>
+                    <span class="fade-in-text">Digital Innovation</span>
+                </h1>
+                
+                <!-- Description text -->
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in animation-delay-500">
+                    Our team of experts combines technical prowess with creative thinking to deliver transformative IT solutions that drive business success.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Stat 1 -->
+                <div class="team-stat-card p-8 rounded-xl border border-gray-100 text-center opacity-0 animate-fade-in-up animation-delay-300">
+                    <div class="team-stat-icon w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-2">150+</h3>
+                    <p class="text-gray-600">Dedicated Professionals</p>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="team-stat-card p-8 rounded-xl border border-gray-100 text-center opacity-0 animate-fade-in-up animation-delay-500">
+                    <div class="team-stat-icon w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-2">25+</h3>
+                    <p class="text-gray-600">Years Combined Experience</p>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="team-stat-card p-8 rounded-xl border border-gray-100 text-center opacity-0 animate-fade-in-up animation-delay-700">
+                    <div class="team-stat-icon w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-2">50+</h3>
+                    <p class="text-gray-600">Industry Certifications</p>
+                </div>
+                
+                <!-- Stat 4 -->
+                <div class="team-stat-card p-8 rounded-xl border border-gray-100 text-center opacity-0 animate-fade-in-up animation-delay-900">
+                    <div class="team-stat-icon w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-2">300+</h3>
+                    <p class="text-gray-600">Projects Delivered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full mb-4">
+                    Leadership
+                </span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Visionary Leadership</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our executive team combines decades of industry experience with a passion for innovation and digital transformation.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Leader 1 -->
+                <div class="team-member-card bg-white rounded-xl shadow-md overflow-hidden opacity-0 animate-fade-in-up animation-delay-300">
+                    <div class="team-member-inner">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 alt="Rajesh Kumar" 
+                                 class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Rajesh Kumar</h3>
+                                <p class="text-blue-200">CEO & Founder</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">With over 20 years in the IT industry, Rajesh founded INFOCERA with a vision to bridge technology and business needs.</p>
+                            <div class="team-member-social flex space-x-3">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leader 2 -->
+                <div class="team-member-card bg-white rounded-xl shadow-md overflow-hidden opacity-0 animate-fade-in-up animation-delay-500">
+                    <div class="team-member-inner">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 alt="Priya Sharma" 
+                                 class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Priya Sharma</h3>
+                                <p class="text-blue-200">CTO</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Technology visionary with expertise in cloud architecture and AI, leading our technical strategy and innovation.</p>
+                            <div class="team-member-social flex space-x-3">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leader 3 -->
+                <div class="team-member-card bg-white rounded-xl shadow-md overflow-hidden opacity-0 animate-fade-in-up animation-delay-700">
+                    <div class="team-member-inner">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 alt="Amit Patel" 
+                                 class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Amit Patel</h3>
+                                <p class="text-blue-200">Head of Engineering</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Leads our engineering teams with a focus on scalable solutions and cutting-edge technologies.</p>
+                            <div class="team-member-social flex space-x-3">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leader 4 -->
+                <div class="team-member-card bg-white rounded-xl shadow-md overflow-hidden opacity-0 animate-fade-in-up animation-delay-900">
+                    <div class="team-member-inner">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 alt="Rahul Verma" 
+                                 class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Rahul Verma</h3>
+                                <p class="text-blue-200">Chief Marketing Officer</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Drives our marketing strategies with a focus on brand growth and customer engagement.</p>
+                            <div class="team-member-social flex space-x-3">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c-5.421 0-9.837 4.416-9.837 9.837 0 4.354 2.813 8.065 6.737 9.387.492.09.672-.213.672-.476 0-.236-.009-.865-.014-1.698-2.742.596-3.321-1.321-3.321-1.321-.447-1.135-1.091-1.438-1.091-1.438-.891-.609.067-.597.067-.597 1.004.071 1.532 1.031 1.532 1.031.875 1.5 2.295 1.067 2.855.816.089-.634.342-1.067.622-1.313-2.19-.25-4.493-1.095-4.493-4.877 0-1.077.384-1.957 1.014-2.647-.102-.25-.439-1.26.096-2.625 0 0 .827-.265 2.71 1.011a9.44 9.44 0 012.47-.333c.838.004 1.682.114 2.47.333 1.882-1.276 2.708-1.011 2.708-1.011.537 1.365.2 2.375.098 2.625.631.69 1.012 1.57 1.012 2.647 0 3.79-2.307 4.624-4.504 4.868.351.303.664.902.664 1.818 0 1.313-.012 2.373-.012 2.693 0 .265.18.57.678.474 3.922-1.324 6.731-5.033 6.731-9.385 0-5.421-4.416-9.837-9.837-9.837z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

@@ -1,0 +1,483 @@
+{% extends "index.html" %}
+{% block title %}INFOCERA | Careers{% endblock title %}
+{% block stylesheet %}
+.hero-gradient {
+    background: radial-gradient(50% 50% at 50% 50%, #F3F4F6 0%, rgba(243, 244, 246, 0) 100%);
+}
+/* Animation keyframes */
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+    animation-delay: 0.6s;
+}
+
+.animation-delay-800 {
+    animation-delay: 0.8s;
+}
+
+.animation-delay-1000 {
+    animation-delay: 1s;
+}
+
+/* Gradient text effect */
+.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.text-transparent {
+    color: transparent;
+}
+
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+/* Job card hover effect */
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Benefit icon animation */
+.benefit-icon {
+    transition: all 0.3s ease;
+}
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Pulse animation for featured roles */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.featured-role {
+    animation: pulse 2s infinite;
+}
+
+/* Culture card hover effect */
+.culture-card:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+.culture-card:hover * {
+    color: white !important;
+}
+{% endblock stylesheet %}
+{% block content %}
+{% load static %}
+<div class="font-sans antialiased text-gray-800">
+    <!-- Hero Section -->
+    <section style='background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url({% static "img/career-bg.jpg" %})' 
+    class="bg-cover bg-center bg-no-repeat pt-32 pb-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
+
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+            <div class="absolute bottom-1/3 -right-20 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+        </div>
+        
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Floating particles animation -->
+            <div class="particles absolute inset-0 opacity-20">
+                <div v-for="i in 30" :key="i" class="particle absolute rounded-full bg-blue-500" 
+                    :style="`width: ${Math.random() * 6 + 2}px; height: ${Math.random() * 6 + 2}px; 
+                            top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+                            animation: float ${Math.random() * 15 + 10}s linear infinite ${Math.random() * 5}s;
+                            opacity: ${Math.random() * 0.4 + 0.1};`"></div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center">
+                <!-- Animated status badge -->
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/20 border border-blue-400/30 mb-6 animate-fade-in-up">
+                    <span class="h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+                    <span class="text-sm font-medium text-blue-100 tracking-wider">WE'RE HIRING</span>
+                </div>
+                
+                <!-- Headline -->
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">Shape the Future</span><br>
+                    <span class="text-white">of Technology with Us</span>
+                </h1>
+                
+                <!-- Animated description text -->
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in animation-delay-400">
+                    Join a team of innovators building cutting-edge solutions that transform businesses and empower digital experiences.
+                </p>
+                
+                <!-- Animated buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 opacity-0 animate-fade-in animation-delay-600">
+                    <a href="#open-positions" 
+                       class="inline-flex items-center justify-center px-8 py-4 rounded-lg shadow-lg text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl group">
+                        <span class="relative z-10 flex items-center">
+                            View Open Positions
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-700 to-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    </a>
+                    
+                    <a href="#life-at-infocera" 
+                       class="inline-flex items-center justify-center px-8 py-4 rounded-lg shadow-lg text-lg font-semibold text-white bg-transparent border-2 border-blue-400 hover:bg-blue-900/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-bounce" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                        </svg>
+                        Life at INFOCERA
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce opacity-0 animate-fade-in animation-delay-1000">
+            <div class="flex flex-col items-center">
+                <span class="text-xs text-blue-300 mb-1">Explore More</span>
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join Us Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 opacity-0 animate-fade-in-up">
+                <span class="inline-block px-4 py-2 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full mb-4">
+                    Why INFOCERA?
+                </span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">More Than Just a Job</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We're building a culture where innovation thrives and careers flourish
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Benefit 1 -->
+                <div class="benefit-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <div class="benefit-icon w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Cutting-Edge Projects</h3>
+                    <p class="text-gray-600">
+                        Work with the latest technologies on projects that challenge and inspire you to grow.
+                    </p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="benefit-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <div class="benefit-icon w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Continuous Learning</h3>
+                    <p class="text-gray-600">
+                        Annual training budgets, tech talks, and mentorship programs to fuel your professional growth.
+                    </p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="benefit-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <div class="benefit-icon w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Collaborative Culture</h3>
+                    <p class="text-gray-600">
+                        Work alongside talented professionals in an environment that values teamwork and open communication.
+                    </p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="benefit-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <div class="benefit-icon w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Competitive Benefits</h3>
+                    <p class="text-gray-600">
+                        Comprehensive health coverage, flexible work options, and performance bonuses.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Life at INFOCERA Section -->
+    <section id="life-at-infocera" class="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 opacity-0 animate-fade-in-up">
+                <span class="inline-block px-3 py-1 text-sm font-semibold text-indigo-600 bg-indigo-50 rounded-full mb-4">Our Culture</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Life at INFOCERA</h2>
+                <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Where passion meets purpose, and work feels like home
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Culture 1 -->
+                <div class="culture-card bg-white p-8 rounded-xl shadow-lg transition-all duration-500 h-full flex flex-col">
+                    <div class="flex-shrink-0 mb-6">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                             alt="Team Collaboration" 
+                             class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Collaborative Environment</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">
+                        Our open workspaces and regular hackathons foster creativity and teamwork across all departments.
+                    </p>
+                    <div class="flex items-center text-blue-600 font-medium">
+                        <span>View Gallery</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Culture 2 -->
+                <div class="culture-card bg-white p-8 rounded-xl shadow-lg transition-all duration-500 h-full flex flex-col">
+                    <div class="flex-shrink-0 mb-6">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                             alt="Learning Sessions" 
+                             class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Continuous Growth</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">
+                        Weekly knowledge shares, sponsored certifications, and mentorship programs ensure you're always learning.
+                    </p>
+                    <div class="flex items-center text-blue-600 font-medium">
+                        <span>View Gallery</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Culture 3 -->
+                <div class="culture-card bg-white p-8 rounded-xl shadow-lg transition-all duration-500 h-full flex flex-col">
+                    <div class="flex-shrink-0 mb-6">
+                        <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" 
+                             alt="Team Events" 
+                             class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Work-Life Balance</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">
+                        From team retreats to flexible hours, we prioritize your well-being as much as your professional success.
+                    </p>
+                    <div class="flex items-center text-blue-600 font-medium">
+                        <span>View Gallery</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="/culture" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-300 group">
+                    Explore our culture
+                    <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions Section -->
+    <section id="open-positions" class="py-20 bg-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 opacity-0 animate-fade-in-up">
+                <span class="inline-block px-3 py-1 text-sm font-semibold text-indigo-600 bg-indigo-50 rounded-full mb-4">Join Our Team</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Open Positions</h2>
+                <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Find your perfect role in our growing team of innovators
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Featured Position 1 -->
+                <div class="featured-role job-card bg-white border-2 border-blue-500 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        URGENTLY HIRING
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Senior Full-Stack Developer</h3>
+                    <div class="flex items-center text-gray-500 mb-4">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Bangalore, India</span>
+                        <span class="mx-2">•</span>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Full-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Lead development of enterprise applications using React, Node.js, and cloud technologies. Mentor junior developers and drive technical excellence.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">React</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Node.js</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">AWS</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Microservices</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-gray-900">₹18L - ₹25L/year</span>
+                        <a href="/careers/senior-fullstack-developer" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                            Apply Now
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Featured Position 2 -->
+                <div class="featured-role job-card bg-white border-2 border-blue-500 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        NEW POSITION
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Cloud Solutions Architect</h3>
+                    <div class="flex items-center text-gray-500 mb-4">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Remote</span>
+                        <span class="mx-2">•</span>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Full-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Design and implement cloud-native solutions for enterprise clients. Lead migration projects and optimize cloud infrastructure.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">AWS</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Azure</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Terraform</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Kubernetes</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-gray-900">₹25L - ₹35L/year</span>
+                        <a href="/careers/cloud-solutions-architect" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                            Apply Now
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Position 3 -->
+                <div class="job-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Frontend Developer</h3>
+                    <div class="flex items-center text-gray-500 mb-4">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Hyderabad, India</span>
+                        <span class="mx-2">•</span>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Full-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Build responsive, accessible user interfaces for our enterprise clients using React and modern frontend tooling.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">React</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">TypeScript</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">CSS-in-JS</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-gray-900">₹12L - ₹18L/year</span>
+                        <a href="/careers/frontend-developer" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Position 4 -->
+                <div class="job-card bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">DevOps Engineer</h3>
+                    <div class="flex items-center text-gray-500 mb-4">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Pune, India</span>
+                        <span class="mx-2">•</span>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Full-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Automate infrastructure, CI/CD pipelines, and monitoring systems to ensure high availability and scalability.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Docker</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Kubernetes</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">CI/CD</span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Terraform</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-gray-900">₹15L - ₹22L/year</span>
+                        <a href="/careers/devops-engineer" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

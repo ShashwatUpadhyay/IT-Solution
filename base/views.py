@@ -15,3 +15,9 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def career(request):
+    return render(request, 'career.html')
+
+def team(request):
+    return render(request, 'team.html')
