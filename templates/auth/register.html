@@ -1,0 +1,416 @@
+{% extends "index.html" %}
+{% block title %}INFOCERA | Register{% endblock title %}
+{% block stylesheet %}
+<style>
+    .register-gradient {
+        background: radial-gradient(50% 50% at 50% 50%, #F3F4F6 0%, rgba(243, 244, 246, 0) 100%);
+    }
+    
+    /* Animation keyframes */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .animation-delay-200 {
+        animation-delay: 0.2s;
+    }
+    
+    .animation-delay-400 {
+        animation-delay: 0.4s;
+    }
+    
+    .animation-delay-600 {
+        animation-delay: 0.6s;
+    }
+    
+    /* Form styling */
+    .form-card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    }
+    
+    .form-card:hover {
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    }
+    
+    .input-field {
+        transition: all 0.3s ease;
+        background: rgba(249, 250, 251, 0.8);
+        border: 1px solid rgba(209, 213, 219, 0.5);
+    }
+    
+    .input-field:focus {
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: rgba(249, 250, 251, 1);
+    }
+    
+    .input-field:hover {
+        border-color: rgba(156, 163, 175, 0.8);
+    }
+    
+    .password-toggle {
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    
+    .btn-gradient {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-gradient:hover {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .btn-gradient:active {
+        transform: translateY(0);
+    }
+    
+    /* Checkbox styling */
+    .custom-checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+    
+    .custom-checkbox:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+    }
+    
+    .custom-checkbox:checked::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+    
+    /* Divider styling */
+    .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #6b7280;
+    }
+    
+    .divider::before,
+    .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .divider::before {
+        margin-right: 1em;
+    }
+    
+    .divider::after {
+        margin-left: 1em;
+    }
+    
+    /* Social buttons */
+    .social-btn {
+        transition: all 0.3s ease;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .social-btn:hover {
+        border-color: #d1d5db;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+    
+    /* Validation styling */
+    .error-message {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+    
+    .input-error {
+        border-color: #ef4444;
+    }
+    
+    .input-error:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+</style>
+{% endblock stylesheet %}
+{% load static %}
+{% block content %}
+<section class="min-h-screen pt-[100px] bg-gradient-to-br from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <!-- Animated background elements -->
+    <div class="relative inset-0 overflow-hidden opacity-20 pointer-events-none">
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute bottom-1/3 -right-20 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 2s"></div>
+    </div>
+    
+    <div class="max-w-md w-full space-y-8 relative z-10">
+        <div class="text-center opacity-0 animate-fade-in-up">
+            <!-- Company logo -->
+            <div class="flex justify-center mb-6">
+                <img src="{% static 'svg/logo.svg' %}" alt="Infocera" class="h-12">
+            </div>
+            
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                Join the Digital Transformation
+            </h2>
+            <p class="mt-2 text-sm text-gray-600 opacity-0 animate-fade-in animation-delay-200">
+                Create your account to access our cutting-edge IT solutions
+            </p>
+        </div>
+        
+        <div class="form-card rounded-xl p-8 opacity-0 animate-fade-in animation-delay-400 transition-all duration-300">
+            <form class="mt-8 space-y-6" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="remember" value="true">
+                
+                <div class="rounded-md shadow-sm space-y-4">
+                    <!-- Full Name -->
+                    <div>
+                        <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div class="relative">
+                            <input id="full-name" name="full-name" type="text" required 
+                                   class="input-field appearance-none rounded-lg relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                   placeholder="John Doe">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div>
+                        <label for="email-address" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                        <div class="relative">
+                            <input id="email-address" name="email" type="email" autocomplete="email" required 
+                                   class="input-field appearance-none rounded-lg relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                   placeholder="you@example.com">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <input id="password" name="password" type="password" autocomplete="new-password" required 
+                                   class="input-field appearance-none rounded-lg relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                   placeholder="••••••••">
+                            <div class="password-toggle absolute" onclick="togglePassword('password')">
+                                <svg id="eye-icon-password" class=" h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                                <svg id="eye-slash-icon-password" class=" h-5 w-5 text-gray-400 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-1 text-xs text-gray-500">
+                            Must be at least 8 characters
+                        </div>
+                    </div>
+                    
+                    <!-- Confirm Password -->
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" required 
+                                   class="input-field appearance-none rounded-lg relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                   placeholder="••••••••">
+                            <div class="password-toggle absolute" onclick="togglePassword('confirm-password')">
+                                <svg id="eye-icon-confirm-password" class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                                <svg id="eye-slash-icon-confirm-password" class="h-5 w-5 text-gray-400 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms and Conditions -->
+                    <div class="flex items-center">
+                        <input id="terms" name="terms" type="checkbox" class="custom-checkbox">
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">
+                            I agree to the <a href="/terms" class="font-medium text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="/privacy" class="font-medium text-blue-600 hover:text-blue-500">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn-gradient group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        Create Account
+                    </button>
+                </div>
+            </form>
+{% comment %}             
+            <div class="divider text-xs text-gray-500 my-6 opacity-0 animate-fade-in animation-delay-600">OR CONTINUE WITH</div>
+            
+            <div class="grid grid-cols-2 gap-3 opacity-0 animate-fade-in animation-delay-800">
+                <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 rounded-lg bg-white text-sm font-medium text-gray-700">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.933.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                
+                <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 rounded-lg bg-white text-sm font-medium text-gray-700">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+                    </svg>
+                </a>
+            </div>
+        </div> {% endcomment %}
+        
+        <div class="text-center text-sm text-gray-600 opacity-0 animate-fade-in animation-delay-1000">
+            <p>
+                Already have an account? 
+                <a href="{% url "login" %}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle password visibility
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const eyeIcon = document.getElementById(`eye-icon-${fieldId}`);
+            const eyeSlashIcon = document.getElementById(`eye-slash-icon-${fieldId}`);
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                eyeIcon.classList.add('hidden');
+                eyeSlashIcon.classList.remove('hidden');
+            } else {
+                field.type = 'password';
+                eyeIcon.classList.remove('hidden');
+                eyeSlashIcon.classList.add('hidden');
+            }
+        }
+        
+        // Add event listeners for password toggles
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const fieldId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                togglePassword(fieldId);
+            });
+        });
+        
+        // Form validation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            // Check passwords match
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm-password');
+            
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.classList.add('input-error');
+                document.getElementById('confirm-password-error').classList.remove('hidden');
+                isValid = false;
+            } else {
+                confirmPassword.classList.remove('input-error');
+                document.getElementById('confirm-password-error').classList.add('hidden');
+            }
+            
+            // Check terms checkbox
+            const termsCheckbox = document.getElementById('terms');
+            if (!termsCheckbox.checked) {
+                termsCheckbox.classList.add('input-error');
+                document.getElementById('terms-error').classList.remove('hidden');
+                isValid = false;
+            } else {
+                termsCheckbox.classList.remove('input-error');
+                document.getElementById('terms-error').classList.add('hidden');
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                
+                // Add shake animation to invalid fields
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.classList.add('animate-shake');
+                    setTimeout(() => {
+                        confirmPassword.classList.remove('animate-shake');
+                    }, 500);
+                }
+                
+                if (!termsCheckbox.checked) {
+                    termsCheckbox.classList.add('animate-shake');
+                    setTimeout(() => {
+                        termsCheckbox.classList.remove('animate-shake');
+                    }, 500);
+                }
+            }
+        });
+    });
+</script>
+{% if messages %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% for message in messages %}
+                Swal.fire({
+                    position: "top-end",
+                    icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}info{% endif %}",
+                    title: "{{ message }}",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+{% endblock content %}

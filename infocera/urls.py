@@ -18,11 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from . import settings
 from django.conf.urls.static import static
+from account.views import login_page,register,logout_page
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('', include('base.urls')),
     path('blog/', include('blog.urls')),
+    path('user/', include('account.urls')),
+    path('login/', login_page, name='login'),
+    path('register/', register, name='register'),
+    path('logout/', logout_page, name='logout'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
